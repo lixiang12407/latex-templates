@@ -1,0 +1,179 @@
+\documentclass[12pt, a4paper, oneside]{ctexart}
+\usepackage{amsmath, amsthm, amssymb, bm, color, framed, graphicx, hyperref, mathrsfs}
+\usepackage{fancyhdr}
+\usepackage{color}
+\usepackage[dvipsnames]{xcolor} %\color{Mahogany}
+\usepackage{appendix}
+\usepackage[marginal]{footmisc} %脚注不缩进
+\usepackage{listings}
+
+\usepackage[top=3.2truecm,bottom=2.0truecm,left=2.5truecm,right=2.5truecm,includefoot,xetex]{geometry}
+
+%字体设置
+
+%重定义
+\renewcommand{\contentsname}{\hspace*{\fill}目\quad 录\hspace*{\fill}}
+\renewcommand{\abstractname}{摘要}
+\renewcommand{\refname}{参考文献}
+\renewcommand{\figurename}{图}
+\renewcommand{\tablename}{表}
+
+%字号设置
+\newcommand{\chuhao}{\fontsize{42pt}{\baselineskip}\selectfont}
+\newcommand{\xiaochuhao}{\fontsize{36pt}{\baselineskip}\selectfont}
+\newcommand{\yihao}{\fontsize{28pt}{\baselineskip}\selectfont}
+\newcommand{\erhao}{\fontsize{21pt}{\baselineskip}\selectfont}
+\newcommand{\xiaoerhao}{\fontsize{18pt}{\baselineskip}\selectfont}
+\newcommand{\sanhao}{\fontsize{15.75pt}{\baselineskip}\selectfont}
+\newcommand{\sihao}{\fontsize{14pt}{\baselineskip}\selectfont}
+\newcommand{\xiaosihao}{\fontsize{12pt}{\baselineskip}\selectfont}
+\newcommand{\wuhao}{\fontsize{10.5pt}{\baselineskip}\selectfont}
+\newcommand{\xiaowuhao}{\fontsize{9pt}{\baselineskip}\selectfont}
+\newcommand{\liuhao}{\fontsize{7.875pt}{\baselineskip}\selectfont}
+\newcommand{\qihao}{\fontsize{5.25pt}{\baselineskip}\selectfont}
+
+\newcommand{\HRule}{\rule{\linewidth}{0.5mm}}
+
+%行间距离
+\linespread{1.4}
+
+
+%设置 section 属性
+\makeatletter
+\renewcommand\section{\@startsection{section}{1}{\z@}%
+{-1.5ex \@plus -.5ex \@minus -.2ex}%
+{.5ex \@plus .1ex}%
+{\normalfont\sihao\heiti}}
+\makeatother
+%设置 subsection 属性
+\makeatletter
+\renewcommand\subsection{\@startsection{subsection}{1}{\z@}%
+{-1.25ex \@plus -.5ex \@minus -.2ex}%
+{.4ex \@plus .1ex}%
+{\normalfont\xiaosihao\heiti}}
+\makeatother
+%设置 subsubsection 属性
+\makeatletter
+\renewcommand\subsubsection{\@startsection{subsubsection}{1}{\z@}%
+{-1ex \@plus -.5ex \@minus -.2ex}%
+{.3ex \@plus .1ex}%
+{\normalfont\xiaosihao\kaishu}}
+\makeatother
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{document}
+%页眉设置
+\pagestyle{fancy}
+\lhead{\wuhao 居左页眉}
+\chead{\wuhao 居中页眉}
+\rhead{\wuhao 居右页眉}
+%双线页眉设置
+\makeatletter
+\def\headrule{{\if@fancyplain\let\headrulewidth\fi
+\hrule\@height 1.0pt \@width\headwidth\vskip1pt
+\hrule\@height 0.5pt \@width\headwidth
+\vskip-2\headrulewidth\vskip-1pt}
+\vspace{6mm}}
+\makeatother
+
+\begin{titlepage}
+\thispagestyle{empty}
+\begin{center}
+%\includegraphics{Images/codeforces-logo-with-telegram.png}
+
+\vspace*{20mm}
+
+\HRule 
+\vspace{9mm} %magenta
+{ \chuhao\color{Mahogany}{Daily Notes}}
+
+\vspace{3mm}
+
+{\erhao \color{Mahogany}{Normal Notes}}
+\vspace{9mm} %magenta
+\HRule
+
+\vspace{3mm}
+
+\includegraphics[width=0.6\textwidth]{Image/icpc.png}
+
+\end{center}
+
+\vspace{9mm}
+\begin{flushright}
+\erhao{Lee}\\
+\erhao{\today}
+\end{flushright}
+
+\end{titlepage}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\thispagestyle{empty}
+\tableofcontents
+\setcounter{page}{0}
+\newpage
+
+\section{章节1}
+% 字体
+{\songti 宋体} 模板\footnote{\noindent \textbf{收稿日期}：2000-06-30；}
+
+脚注模板\footnote{\noindent \textbf{收稿日期}：2000-06-30；\textbf{修回日期}：2000-11-16\\ 
+\textbf{基金项目}：``九五''国家科技攻关资助项目(96-B02-03-05)\\ \textbf{作者简介}：
+陆峰(1970-)，男，新疆维吾尔自治区乌鲁木齐市人，中国科学院资源与环境信息系统国家重点实验室博士后，
+主要从事交通网络的地理信息系统数据模型和网络分析相关算法研究。}。
+    
+\lstset{language=C++,
+        basicstyle=\ttfamily,
+        keywordstyle=\color{blue}\ttfamily,
+        stringstyle=\color{red}\ttfamily,
+        commentstyle=\color{green}\ttfamily,
+        morecomment=[l][\color{magenta}]{\#},
+        breaklines = true,                  % 代码过长则换行
+        numbers = left,                     % 行号在左侧显示
+    	  numberstyle = \small,               % 行号字体
+    	  columns = fixed,                    % 字间距固定
+    	  rulesepcolor= \color{gray},             % 代码块边框颜色
+    	  backgroundcolor = \color{yellow!10},    % 背景色：淡黄
+    	  frame = shadowbox,                  % 用（带影子效果）方框框住代码块
+    	  flexiblecolumns,
+}
+\begin{lstlisting}
+    #include<stdio.h>
+    #include<iostream>
+    // A comment xxxxxx  xxxxxx xxxxxx xxxxxx xxxxxx xxxxxx 
+    /*
+    xxx
+    xxx
+    xxxxxx
+    xx
+    xxxx
+    xxxxxxxxxxx
+    xxxxxxxxx
+    xxxx
+    */
+    int main(void)
+    {
+    printf("Hello World\n");
+    return 0;
+    }
+\end{lstlisting}
+
+{\heiti 黑体}
+    
+{\fangsong 仿宋}
+    
+{\kaishu 楷书}
+\subsection{子章节1}
+\subsubsection{子子章节1}
+\subsubsection{子子章节2}
+\subsection{子章节subsection 2}
+\subsection{子章节subsection 3}
+\subsection{子章节subsection 4}
+
+\appendix
+\section{附录1}
+\subsection{附录1-1}
+
+\end{document}

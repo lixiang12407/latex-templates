@@ -1,0 +1,57 @@
+\documentclass[UTF8]{ctexart}
+
+\usepackage{geometry}
+\geometry{left=2cm,right=2cm,top=2.5cm,bottom=2cm}
+
+\title{你好，world!}
+\author{Liam}
+\date{\today}
+
+%---导言区---
+\usepackage{fancyhdr} %调用宏包
+
+% ---基本设置---
+
+%设定页面的页眉页脚类型，$\LaTeX$内置了四种：empty、plain、headings及myheadings，但是我们现在不用这些内置的样式。
+\pagestyle{fancy}
+
+%清除原页眉页脚样式
+\fancyhf{} 
+
+%R：页面右边；O：奇数页；\leftmark：表示“一级标题”
+\fancyhead[RO]{\leftmark}
+
+%L：页面左边；E：偶数页；\rightmark：表示“二级标题”
+\fancyhead[LE]{\rightmark}
+
+%C：页面中间
+\fancyhead[CO, CE]{文章题目}
+
+%同上，但是不同位置放置不同信息
+\fancyhead[LO, RE]{其他信息}
+
+% 设置页脚，页眉的位置上也可以放置页码
+\fancyfoot[RO, LE]{80301920}
+\fancyfoot[LO, RE]{其他信息}
+
+% 设置页眉页脚横线及样式
+%页眉线宽，设为0可以去页眉线
+\renewcommand{\headrulewidth}{0.3mm} 
+%页脚线宽，设为0可以去页眉线
+\renewcommand{\footrulewidth}{0.1mm} 
+
+\begin{document}
+
+\tableofcontents
+\section{你好中国}
+中国在East Asia.
+\subsection{Hello Beijing}
+北京是capital of China.
+\subsubsection{Hello Dongcheng District}
+\paragraph{Tian'anmen Square}
+is in the center of Beijing
+\subparagraph{Chairman Mao}
+is in the center of 天安门广场。
+\subsection{Hello 山东}
+\paragraph{山东大学} is one of the best university in 山东。
+\end{document}

@@ -1,0 +1,150 @@
+\documentclass[UTF8,12pt]{ctexart}
+
+\usepackage{amsmath}
+\usepackage{geometry}
+\geometry{left=2cm,right=2cm,top=2.5cm,bottom=2cm}
+
+\title{Erasure Code}
+\author{Lee}
+\date{\today}
+
+%---导言区---
+\usepackage{fancyhdr} %调用宏包
+
+% ---基本设置---
+
+%设定页面的页眉页脚类型，$\LaTeX$内置了四种：empty、plain、headings及myheadings，但是我们现在不用这些内置的样式。
+\pagestyle{fancy}
+
+%清除原页眉页脚样式
+\fancyhf{} 
+
+%R：页面右边；O：奇数页；\leftmark：表示“一级标题”
+\fancyhead[RO]{\leftmark}
+
+%L：页面左边；E：偶数页；\rightmark：表示“二级标题”
+\fancyhead[LE]{\rightmark}
+
+%C：页面中间
+\fancyhead[CO, CE]{Title}
+
+%同上，但是不同位置放置不同信息
+\fancyhead[LO, RE]{info}
+
+% 设置页脚，页眉的位置上也可以放置页码
+\fancyfoot[RO, LE]{80301920}
+\fancyfoot[LO, RE]{info}
+
+% 设置页眉页脚横线及样式
+%页眉线宽，设为0可以去页眉线
+\renewcommand{\headrulewidth}{0.3mm} 
+%页脚线宽，设为0可以去页眉线
+\renewcommand{\footrulewidth}{0.1mm} 
+
+\begin{document}
+RS code是基于有限域的一种编码算法，有限域又称为Galois Field，是以法国著名数学家Galois命名的，在RS code中使用$GF(2^w)$，其中$2^w \ge n + m$。 
+
+RS code定义了一个$(n+m) * n$的Distribution Matrix。
+
+\[
+\boldsymbol{B} = \left[
+\begin{matrix}
+1 & 0 & 0 & 0 & 0\\
+0 & 1 & 0 & 0 & 0\\
+0 & 0 & 1 & 0 & 0\\
+0 & 0 & 0 & 1 & 0\\
+0 & 0 & 0 & 0 & 1\\
+B_{11} & B_{12} & B_{13} & B_{14} & B_{15}\\
+B_{21} & B_{22} & B_{23} & B_{24} & B_{25}\\
+B_{31} & B_{32} & B_{33} & B_{34} & B_{35}
+\end{matrix}
+\right]
+\]
+
+对于每一段数据，都可以通过$\boldsymbol{B}*\boldsymbol{D}$得到。
+
+\[
+\left[
+\begin{matrix}
+1 & 0 & 0 & 0 & 0\\
+0 & 1 & 0 & 0 & 0\\
+0 & 0 & 1 & 0 & 0\\
+0 & 0 & 0 & 1 & 0\\
+0 & 0 & 0 & 0 & 1\\
+B_{11} & B_{12} & B_{13} & B_{14} & B_{15}\\
+B_{21} & B_{22} & B_{23} & B_{24} & B_{25}\\
+B_{31} & B_{32} & B_{33} & B_{34} & B_{35}
+\end{matrix}
+\right]
+\times
+\left[
+\begin{matrix}
+D_1\\
+D_2\\
+D_3\\
+D_4\\
+D_5
+\end{matrix}
+\right]
+=
+\left[
+\begin{matrix}
+D_1\\
+D_2\\
+D_3\\
+D_4\\
+D_5\\
+C_1\\
+C_2\\
+C_3
+\end{matrix}
+\right]
+\]
+
+假如$D_1$、$D_4$、$C_2$失效，通过从矩阵$\boldsymbol{B}$和$\boldsymbol{B}*\boldsymbol{D}$中去掉相应的行（$\boldsymbol{B'}$和Survivors，可以得到如下等式：
+
+\[
+\left[
+\begin{matrix}
+0 & 1 & 0 & 0 & 0\\
+0 & 0 & 1 & 0 & 0\\
+0 & 0 & 0 & 0 & 1\\
+B_{11} & B_{12} & B_{13} & B_{14} & B_{15}\\
+B_{31} & B_{32} & B_{33} & B_{34} & B_{35}
+\end{matrix}
+\right]
+\times
+\left[
+\begin{matrix}
+D_1\\
+D_2\\
+D_3\\
+D_4\\
+D_5
+\end{matrix}
+\right]
+=
+\left[
+\begin{matrix}
+D_2\\
+D_3\\
+D_5\\
+C_1\\
+C_3
+\end{matrix}
+\right]
+\]
+
+
+\[
+\boldsymbol{B'} \times \boldsymbol{D} = \boldsymbol{Survivors}
+\]
+
+
+等式左右两端乘以$\boldsymbol{B'}$矩阵的逆，即可求得$\boldsymbol{D}$
+
+%\[
+%\boldsymbol{B'^{-1}}\bodysymbol{B}\boldsymbol{D} = \boldsymbol{B'^{-1}}}\boldsymbol{Survivors}
+%\]
+
+\end{document}
