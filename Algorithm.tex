@@ -1,0 +1,608 @@
+\documentclass[12pt, a4paper, oneside]{ctexart}
+\usepackage{amsmath, amsthm, amssymb, bm, color, framed, graphicx, hyperref, mathrsfs}
+\usepackage{fancyhdr}
+\usepackage{color}
+\usepackage[dvipsnames]{xcolor} %\color{Mahogany}
+\usepackage{appendix}
+\usepackage[marginal]{footmisc} %脚注不缩进
+\usepackage{listings}
+
+\usepackage[top=3.2truecm,bottom=2.0truecm,left=2.5truecm,right=2.5truecm,includefoot,xetex]{geometry}
+\usepackage[linesnumbered,lined,boxed,commentsnumbered]{algorithm2e}
+
+% 调整itemize间距
+\usepackage{enumitem}
+\setenumerate[1]{itemsep=0pt,partopsep=0pt,parsep=\parskip,topsep=5pt}
+\setitemize[1]{itemsep=0pt,partopsep=0pt,parsep=\parskip,topsep=5pt}
+\setdescription{itemsep=0pt,partopsep=0pt,parsep=\parskip,topsep=5pt}
+
+%字体设置
+
+%重定义
+\renewcommand{\contentsname}{\hspace*{\fill}目\quad 录\hspace*{\fill}}
+\renewcommand{\abstractname}{摘要}
+\renewcommand{\refname}{参考文献}
+\renewcommand{\figurename}{图}
+\renewcommand{\tablename}{表}
+
+%字号设置
+\newcommand{\chuhao}{\fontsize{42pt}{\baselineskip}\selectfont}
+\newcommand{\xiaochuhao}{\fontsize{36pt}{\baselineskip}\selectfont}
+\newcommand{\yihao}{\fontsize{28pt}{\baselineskip}\selectfont}
+\newcommand{\erhao}{\fontsize{21pt}{\baselineskip}\selectfont}
+\newcommand{\xiaoerhao}{\fontsize{18pt}{\baselineskip}\selectfont}
+\newcommand{\sanhao}{\fontsize{15.75pt}{\baselineskip}\selectfont}
+\newcommand{\sihao}{\fontsize{14pt}{\baselineskip}\selectfont}
+\newcommand{\xiaosihao}{\fontsize{12pt}{\baselineskip}\selectfont}
+\newcommand{\wuhao}{\fontsize{10.5pt}{\baselineskip}\selectfont}
+\newcommand{\xiaowuhao}{\fontsize{9pt}{\baselineskip}\selectfont}
+\newcommand{\liuhao}{\fontsize{7.875pt}{\baselineskip}\selectfont}
+\newcommand{\qihao}{\fontsize{5.25pt}{\baselineskip}\selectfont}
+
+\newcommand{\HRule}{\rule{\linewidth}{0.5mm}}
+
+%行间距离
+\linespread{1.4}
+
+
+%设置 section 属性
+\makeatletter
+\renewcommand\section{\@startsection{section}{1}{\z@}%
+{-1.5ex \@plus -.5ex \@minus -.2ex}%
+{.5ex \@plus .1ex}%
+{\normalfont\sihao\heiti}}
+\makeatother
+%设置 subsection 属性
+\makeatletter
+\renewcommand\subsection{\@startsection{subsection}{1}{\z@}%
+{-1.25ex \@plus -.5ex \@minus -.2ex}%
+{.4ex \@plus .1ex}%
+{\normalfont\xiaosihao\heiti}}
+\makeatother
+%设置 subsubsection 属性
+\makeatletter
+\renewcommand\subsubsection{\@startsection{subsubsection}{1}{\z@}%
+{-1ex \@plus -.5ex \@minus -.2ex}%
+{.3ex \@plus .1ex}%
+{\normalfont\xiaosihao\kaishu}}
+\makeatother
+
+\definecolor{shadecolor}{RGB}{241, 241, 255}
+
+\newenvironment{problem}{\begin{shaded}\par\noindent\textbf{题目. }}{\end{shaded}\par}
+\newenvironment{analysis}{\par\noindent\textbf{分析. }}{\par}
+\newenvironment{solution}{\par\noindent\textbf{解答. }}{\par}
+\newenvironment{template}{\par\noindent\textbf{代码模板. }}{\par}
+
+\lstset{language=C++,
+        basicstyle=\ttfamily,
+        keywordstyle=\color{blue}\ttfamily,
+        stringstyle=\color{red}\ttfamily,
+        commentstyle=\color{green}\ttfamily,
+        morecomment=[l][\color{magenta}]{\#},
+        breaklines = true,                  % 代码过长则换行
+        numbers = left,                     % 行号在左侧显示
+    	  numberstyle = \small,               % 行号字体
+    	  columns = fixed,                    % 字间距固定
+    	  rulesepcolor= \color{gray},             % 代码块边框颜色
+    	  backgroundcolor = \color{yellow!10},    % 背景色：淡黄
+    	  frame = shadowbox,                  % 用（带影子效果）方框框住代码块
+    	  flexiblecolumns,
+}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\usepackage{lastpage}
+
+\begin{document}
+%页眉设置
+\pagestyle{fancy}
+\lhead{\wuhao 第 \thesection 节}
+\chead{\wuhao 算法基础笔记}
+\rhead{\wuhao \thepage\ of \pageref{LastPage}}
+%双线页眉设置
+\makeatletter
+\def\headrule{{\if@fancyplain\let\headrulewidth\fi
+\hrule\@height 1.0pt \@width\headwidth\vskip1pt
+\hrule\@height 0.5pt \@width\headwidth
+\vskip-2\headrulewidth\vskip-1pt}
+\vspace{6mm}}
+\makeatother
+
+\begin{titlepage}
+\thispagestyle{empty}
+\begin{center}
+%\includegraphics{Images/codeforces-logo-with-telegram.png}
+
+\vspace*{20mm}
+
+\HRule 
+\vspace{9mm} %magenta
+{ \chuhao\color{Mahogany}{Daily Notes}}
+
+\vspace{3mm}
+
+{\erhao \color{Mahogany}{Normal Notes}}
+\vspace{9mm} %magenta
+\HRule
+
+\vspace{3mm}
+
+\includegraphics[width=0.6\textwidth]{Image/icpc.png}
+
+\end{center}
+
+\vspace{9mm}
+\begin{flushright}
+\erhao{Lee}\\
+\erhao{2021.11.01}
+\end{flushright}
+
+\end{titlepage}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\thispagestyle{empty}
+\tableofcontents
+\setcounter{page}{0}
+\newpage
+
+\section{章节1}
+% 字体
+{\songti 宋体} 模板\footnote{\noindent \textbf{收稿日期}：2000-06-30；}
+
+脚注模板\footnote{\noindent \textbf{收稿日期}：2000-06-30；\textbf{修回日期}：2000-11-16\\ 
+\textbf{基金项目}：``九五''国家科技攻关资助项目(96-B02-03-05)\\ \textbf{作者简介}：
+XXX(1970-)，男，中国科学院资源与环境信息系统国家重点实验室博士后，
+主要从事交通网络的地理信息系统数据模型和网络分析相关算法研究。}。
+   
+
+\begin{lstlisting}
+    #include<stdio.h>
+    #include<iostream>
+    // A comment xxxxxx  xxxxxx xxxxxx xxxxxx xxxxxx xxxxxx 
+    /*
+    xxx
+    xxx
+    xxxxxx
+    xx
+    xxxx
+    xxxxxxxxxxx
+    xxxxxxxxx
+    xxxx
+    */
+    int main(void)
+    {
+    printf("Hello World\n");
+    return 0;
+    }
+\end{lstlisting}
+
+{\heiti 黑体}
+    
+{\fangsong 仿宋}
+    
+{\kaishu 楷书}
+
+\section{基础算法}
+\subsection{排序}
+\subsubsection{快速排序}
+
+\begin{lstlisting}
+void quick_sort(int q[], int l, int r) {
+    if (l >= r) return;
+    int i = l - 1, j = r + 1, x = q[ l + r >> 1 ];
+    while (l < r) {
+        do i++; while (q[i] < x);
+        do j--; while (q[j] > x);
+        if (i < j) swap(q[i], q[j]);
+    }
+    quick_sort(q, l, j);
+    quick_sort(q, j + 1, r);
+}
+\end{lstlisting}
+
+\subsubsection{归并排序}
+
+\begin{lstlisting}
+void merge_sort(int q[], int l, int r) {
+    if (l >= r) return;
+    int mid = l + r >> 1;
+    merge_sort(q, l, mid);
+    merge_sort(q, mid + 1, r);
+    int i = l, j = mid + 1, k = 0;
+    while (i <= mid && j <= r) {
+        if (q[i] < q[j]) tmp[k++] = q[i++];
+        else tmp[k++] = q[j++];
+    }
+    while (i <= mid) tmp[k++] = q[i++];
+    while (j <= r) tmp[k++] = q[j++];
+    for (int i = l, j = 0; i <= r; i++, j++) q[i] = tmp[j];
+}
+\end{lstlisting}
+
+\subsection{字符串}
+
+\subsubsection{KMP}
+
+\begin{lstlisting}
+for (int i = 1, j = 0; i <= plen; i++) {
+    j = ne[j];
+    // i表示str串的位置
+    // j表示pattern串匹配的位置
+    while (j && p[i] != p[j]) j = ne[j];
+    ne[i+1] = (p[i] == p[j]) ? j + 1 : 0;
+}
+
+for (int i = 0, j = 0; i < slen; i++) {
+    while (j && s[i] != p[j]) j = ne[j];
+    if (s[i] == p[j]) j++;
+    if (j == plen) {
+        j = ne[j];
+        // match
+    }
+}
+\end{lstlisting}
+
+\subsubsection{Manacher}
+
+
+
+\section{数据结构}
+
+\section{搜索与图论}
+
+
+\section{数论}
+
+\subsection{质数}
+
+\subsubsection{埃式筛}
+从 2 开始筛掉质数本身的倍数，向后找到的第一个没被筛掉的数一定是质数，复杂度 $O(nloglogn)$
+
+\begin{lstlisting}
+void get_primes(int n) {
+    for (int i = 2; i <= n; i++) {
+        if (!st[i]) {
+            primes[cnt++] = i;
+            for (int j = i + i; j <= n; j += i) st[j] = true;
+        }
+    }
+}
+\end{lstlisting}
+
+\subsubsection{线性筛}
+
+对于质数 $i$，从当前已经找到的第一个质数开始筛 $primes[j] * i$，直到 $primes[j] \mid i$，复杂度 $O(n)$
+
+\begin{lstlisting}
+void get_primes(int n) {
+    for (int i = 2; i <= n; i++) {
+        if (!st[i]) {
+            primes[cnt++] = i;
+        }
+        for (int j = 0; primes[j] <= n / i; j++) {
+            st[primes[j] * i] = true;
+            if (i % primes[j] == 0) break;
+        }
+    }
+}
+\end{lstlisting}
+
+\section{动态规划}
+\subsection{背包问题}
+\subsubsection{分组背包问题}
+
+\textbf {问题描述：}多组物品，每组有若干个物品，同组内的物品最多只能选一个，在总体积不超过限制的情况下，求总价值。
+
+\begin{itemize}
+\item 状态表示 $f[i,j]$
+\begin{itemize}
+\item 集合：从前 $i$ 组物品中选，且总体积不大于 $j$ 的所有选法
+\item 属性：所有选法价值最大值（$Max$）
+\end{itemize}
+\item 状态计算 -- 集合划分：按第 $i$ 组物品选哪个作为划分依据
+\begin{enumerate}
+\item 第 $i$ 组物品一个都不选：$f[i-1,j]$
+\item 第 $i$ 组物品选择第 1 件物品：$f[i-1,j - v[i,1]] + w[i,1]$
+\item ...
+\item 第 $i$ 组物品选择第 $k$ 件物品：$f[i-1, j-v[i,k]] + w[i,k]$
+\item ...
+\end{enumerate}
+\end{itemize}
+
+由此可推出分组背包的状态转移方程为：
+
+\[
+f[i][j] = max(f[i-1][j-v[i,k]] + w[i,k])
+\]
+
+一维优化：{\kaishu 从大到小枚举空间 $j$，由于只申请了一维空间存储最大价值，但是每一轮计算需要使用上一轮 $i-1$ 的旧值进行更新，所以 $j$ 需要反方向遍历，$ j := m \rightarrow 0 \ \&\& \ j \ge v[i,k]$}
+
+\[
+f[j] = max(f[j-v[i,k]] + w[i,k])
+\]
+
+\begin{algorithm}
+\For {$i \leftarrow 1$ \KwTo $n$} {
+	\For {$j \leftarrow m$ \KwTo $0$} {
+		\For {$k \leftarrow 0$ \KwTo $s[i]$} {
+			\If {$j \ge v[i][k]$} {
+				$f[i] = max(f[j], f[j-v[i][k]] + w[i][k])$\;
+			}
+		}
+	}
+}
+\end{algorithm}
+
+\begin{problem}
+AcWing 9. 有 $N$ 个物品和一个容量是 $V$ 的背包。每件物品有若干个，同一组的物品最多只能选一个。每件物品的体积是 $v_{ij}$，价值是 $w_{ij}$，其中 $i$ 是组号，$j$ 是组内编号。
+求将哪些物品装入背包，可使物品总体积不超过背包容量，且总价值最大。
+\end{problem}
+
+\begin{template}
+
+\begin{lstlisting}
+#include <iostream>
+using namespace std;
+const int N = 105;
+int f[N];
+int v[N][N], w[N][N], s[N];
+int n, m;
+int main() {
+    cin >> n >> m;
+  // 读入数据
+    for (int i = 1; i <= n; i++) {
+        cin >> s[i];
+        for (int j = 1; j <= s[i]; j++) {
+            cin >> v[i][j] >> w[i][j];
+        }
+    }
+    for (int i = 1; i <= n; i++) {
+        for (int j = m; j >= 0; j--) {
+            for (int k = 0; k <= s[i]; k++) {
+                if (j >= v[i][k]) f[j] = max(f[j], f[j - v[i][k]] + w[i][k]);
+            }
+        }
+    }
+    cout << f[m] << endl;
+    return 0;
+}
+\end{lstlisting}
+
+\end{template}
+
+\subsection{线性DP}
+\subsubsection{数字三角形}
+
+\begin{problem}
+AcWing 898. 给定一个如下图所示的数字三角形，从顶部出发，在每一结点可以选择移动至其左下方的结点或移动至其右下方的结点，一直走到底层，要求找出一条路径，使路径上的数字的和最大。
+
+\begin{lstlisting}
+        7
+      3   8
+    8   1   0
+  2   7   4   4
+4   5   2   6   5
+\end{lstlisting}
+\end{problem}
+
+\begin{analysis}
+
+\begin{itemize}
+\item 状态表示$f[i,j]$
+\begin{itemize}
+\item 集合：所有从起点，走到 $(i,j)$ 的路径集合
+\item 属性：所有路径上数字之和的最大值 $Max$
+\end{itemize}
+\item 状态计算 -- 集合划分：按其前驱路径方向划分
+\begin{enumerate}
+\item 来自左上：$f[i-1,j-1] + a[i,j]$
+\item 来自右上：$f[i-1,j] +a[i,j]$
+\end{enumerate}
+\end{itemize}
+
+由此可推出状态转移方程为：
+
+\[
+f[i][j] = max(f[i-1][j-1] + a[i][j], f[i-1][j] + a[i][j])
+\]
+
+\end{analysis}
+
+\begin{template}
+\begin{lstlisting}
+#include <iostream>
+using namespace std;
+const int N = 505, INF = 1e9;
+int a[N][N], f[N][N];
+int n;
+int main() {
+    scanf("%d", &n);
+    for (int i = 1; i <= n; i++) {
+        for (int j = 1; j <= i; j++) {
+            scanf("%d", &a[i][j]);
+        }
+    }
+    for (int i = 0; i <= n; i++) {
+        for (int j = 0; j <= i + 1; j++) {
+            f[i][j] = -INF;
+        }
+    }
+    f[1][1] = a[1][1];
+    for (int i = 2; i <= n; i++) {
+        for (int j = 1; j <= i; j++) {
+            f[i][j] = max(f[i-1][j-1] + a[i][j], f[i-1][j] + a[i][j]);
+        }
+    }
+    int res = -INF;
+    for (int i = 1; i <= n; i++) res = max(res, f[n][i]);
+    printf("%d\n", res);
+    return 0;
+}
+\end{lstlisting}
+\end{template}
+
+
+\subsubsection{最长上升子序列}
+
+\begin{problem}
+AcWing 895. 给定一个长度为 $N$ 的数列，求数值严格单调递增的子序列的长度最长是多少。
+\end{problem}
+
+\begin{analysis}
+\begin{itemize}
+\item 状态表示 $f[i]$
+\begin{itemize}
+\item 集合：所有以第 $i$ 个数结尾的上升子序列集合
+\item 属性：所有以 $i$ 结尾的上升子序列的长度最大值 $Max$
+\end{itemize}
+\item 状态计算 -- 集合划分：以子序列的倒数第二个数的位置作为划分依据
+\begin{enumerate}
+\item $0$ 表示序列长度为 $1$，即没有倒数第二个数：$0$
+\item $1$ 表示倒数第二个数是 $a[1]$：$f[1] + 1$
+\item ...
+\item $j$ 表示倒数第二个数是 $a[j]$：$f[j] + 1$
+\item ...
+\end{enumerate}
+\end{itemize}
+
+由此可推出状态转移方程为：
+
+\[
+f[i] = max(f[j] + 1)\ ;\ j = 0, 1, 2, ..., i-1 \ \&\& \ a[j] < a[i]
+\]
+
+\end{analysis}
+
+\begin{template}
+\begin{lstlisting}
+#include <iostream>
+using namespace std;
+const int N = 1005;
+int a[N], f[N];
+int n;
+int main() {
+    scanf("%d", &n);
+    for (int i = 1; i <= n; i++) scanf("%d", &a[i]);
+    for (int i = 1; i <= n; i++) {
+        f[i] = 1;
+        for (int j = 1; j < i; j++) {
+            if (a[j] < a[i]) f[i] = max(f[i], f[j] + 1);
+        }
+    }
+    // 最大值不一定是以最后一个元素结尾
+    int res = 0;
+    for (int i = 1; i <= n; i++) res = max(res, f[i]);
+    printf("%d\n", res);
+    return 0;
+}
+\end{lstlisting}
+\end{template}
+
+\subsubsection{最长上升子序列\uppercase\expandafter{\romannumeral2}}
+
+\begin{problem}
+AcWing 896. 给定一个长度为 $N$ 的数列，求数值严格单调递增的子序列的长度最长是多少。
+\end{problem}
+
+\begin{analysis}
+
+{\textbf{贪心、二分}}
+
+上升序列按长度分类，各个长度存结尾最小的数，即每种长度的最长上升子序列结尾的最小值；结尾数值严格单调递增。
+
+各个长度的结尾最小数值构成一个递增队列。
+
+对于一个数 $a_i$ 应该接到小于它的最大一个数后面（二分查找），可能有两种情况：
+
+\begin{enumerate}
+\item 更新某个值：不改变最长子序列的长度，但是会更新某个长度下的最长上升子序列的结尾最小值
+\item 插入（追加）到队列最后：获得一个新长度的上升子序列和它的结尾最小值
+\end{enumerate}
+
+\end{analysis}
+
+\begin{template}
+\begin{lstlisting}
+#include <iostream>
+using namespace std;
+const int N = 100005;
+int a[N], q[N];
+int n;
+int main() {
+    scanf("%d", &n);
+    for (int i = 1; i <= n; i++) scanf("%d", &a[i]);
+    int len = 0;
+    q[0] = -1e9; // 边界条件
+    for (int i = 1; i <= n; i++) {
+        int l = 0, r = len;
+        while (l < r) {
+            int mid = l + r + 1 >> 1;
+            if (q[mid] < a[i]) l = mid;
+            else r = mid - 1;
+        }
+        len = max(len, r + 1);
+        q[r + 1] = a[i];
+    }
+    // 小于a[i]的最后一个数
+    printf("%d\n", len);
+    return 0;
+}
+\end{lstlisting}
+\end{template}
+
+\section{日常杂项}
+\subsection{数学方法}
+
+\subsubsection{四舍五入与取整}
+
+\begin{itemize}
+\item 四舍五入：$p/k + 0.5$
+\item 向下取整：$p/k$ （默认向下取整）
+\item 向上取整：$(p+k-1)/k$
+\end{itemize}
+
+向上取整证明：
+假设 $p = k * n + r$， $(p,k,n,r) \in \mathbb{Z} \quad \& \quad 0 \le r \le k - 1)$，对 $k$ 能否整除 $p$ 分两种情况讨论：
+
+\begin{enumerate}
+\item 如果 $k \mid p$，即 $r = 0$，$p = k * n$，则 $p / k$ 向上取整结果应该是 $n$；\\
+此时有：$p + k - 1 = k * n + k - 1$
+
+\[
+\begin{split}
+\frac{p + k - 1}{k} &= \frac{k * n + k - 1}{k} \\
+&= n + 1 - \frac{1}{k} \\
+\end{split}
+\]
+
+$$n < \frac{p + k - 1}{k} < n + 1$$
+
+向下取整计算结果是 $n$，符合条件。
+
+\item 如果 $k \nmid p$，即 $r \ne 0$，$p = k * n + r$，则 $p / k$ 向上取整的结果应该是 $n + 1$；\\
+此时有：$p + k - 1 = k * n + r + k - 1$
+
+因为：$1 \le r < k$，所以 $k \le r + k - 1 < 2k - 1$，有 $1 \le \frac{r + k - 1}{k} < 2 - \frac{1}{k}$
+
+\[
+\begin{split}
+\frac{p + k - 1}{k} &= \frac{k * n + r + k - 1}{k} \\
+&= n + \frac{r + k - 1}{k} \\
+\end{split}
+\]
+
+$$n + 1 \le \frac{p + k - 1}{k} < n + 2$$
+
+向下取整计算结果是 $n+1$，符合条件。
+
+\end{enumerate}
+
+
+
+\appendix
+\section{附录1}
+\subsection{附录1-1}
+
+\end{document}
